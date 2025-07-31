@@ -187,9 +187,9 @@ app.delete('/api/requests/:id', async (req, res) => {
   }
 });
 
-// Fallback for any unmatched route (serve index.html for frontend routing)
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public/index.html'));
+// Catch-all handler: send back React's index.html file for any non-API routes
+app.get(/^\/(?!api).*/, (req, res) => {
+    res.sendFile(path.join(__dirname, '..', 'frontend', 'index.html'));
 });
 
 // Start server
